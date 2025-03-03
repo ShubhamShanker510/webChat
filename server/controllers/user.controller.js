@@ -2,26 +2,30 @@ const User=require('../models/user.model');
 const bcryptjs=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 
-async function generateAccessToken(user){
-   return await jwt.sign({
-        userId: user._id,
-        name:user.name,
-        email: user.email,
-        avatar: user.avatar
-    },process.env.ACCESS_TOKEN,{
-        expiresIn: '15m'
-    })
+async function generateAccessToken(user) {
+    return jwt.sign(
+        {
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar
+        },
+        process.env.ACCESS_TOKEN, 
+        { expiresIn: '15m' }
+    );
 }
 
-async function generateRefreshToken(user){
-    return await jwt.sign({
-        userId: user._id,
-        name:user.name,
-        email: user.email,
-        avatar: user.avatar
-    },process.env.REFRESH_TOKEN,{
-        expiresIn: '7d'
-    })
+async function generateRefreshToken(user) {
+    return jwt.sign(
+        {
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar
+        },
+        process.env.REFRESH_TOKEN,
+        { expiresIn: '7d' }
+    );
 }
 
 
@@ -57,13 +61,14 @@ const registerUser=async(req,res)=>{
                 message: "Enter your password again"
             })
         } 
+        
 
         //creating new user
         const user=await User.create({
             name,
             email,
             password: hashPassword,
-            avatar
+            avatar: avatar!==''?avatar:'../public/images/default-user.jpg'
         })
 
         if(!user){
@@ -98,7 +103,7 @@ const loginUser=async(req,res)=>{
     try {
         const {email,password}=req.body;
 
-        const user=await User.find({email});
+        const user=await User.findOne({email});
         
         if(!user){
             return res.status(400).json({
@@ -107,8 +112,20 @@ const loginUser=async(req,res)=>{
             })
         }
 
-        const accessToken=generateAccessToken(user);
-        const refreshToken=generateRefreshToken(user);
+        const isValidPassword=await bcryptjs.compare(password,user.password);
+
+        if(!isValidPassword){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid credentials"
+            }
+            )
+        }
+
+
+
+        const accessToken=await generateAccessToken(user);
+        const refreshToken=await generateRefreshToken(user);
 
         if(!accessToken || !refreshToken){
             return res.status(400).json({
@@ -116,6 +133,20 @@ const loginUser=async(req,res)=>{
                 message: "Unable to generate token"
             })
         }
+
+        res.cookie('accessToken',accessToken,{
+            httpOnly: true,
+            secure: true,
+            sameSite: "Strict",
+            maxAge: 15*60*1000
+        })
+
+        res.cookie('refreshToken',refreshToken,{
+            httpOnly: true,
+            secure: true,
+            sameSite: "Strict",
+            maxAge: 7*24*60*60*1000
+        })
 
         return res.status(200).json({
             success: true,
@@ -133,8 +164,74 @@ const loginUser=async(req,res)=>{
         })
     }
 }
+const getNewAccessToken = async (req, res) => {
+    try {
+        const { refreshToken } = req.cookies; 
+
+        if (!refreshToken) {
+            return res.status(401).json({
+                success: false,
+                message: "No refresh token found"
+            });
+        }
+
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN, async (err, user) => {
+            if (err) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Refresh Token expired, Please login again"
+                });
+            }
+
+            const newAccessToken = await generateAccessToken(user);
+
+            res.cookie('accessToken', newAccessToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "Strict",
+                maxAge: 15 * 60 * 1000  
+            });
+
+            return res.status(200).json({
+                success: true,
+                message: "Access Token refreshed successfully"
+            });
+        });
+
+    } catch (error) {
+        console.log("Error in getting new access token =>", error);
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong"
+        });
+    }
+};
+
+const getUser=async(req,res)=>{
+   try {
+    const user=req.userInfo;
+
+    if(!user){
+        return res.status(400).json({
+            success: false,
+            message: "No user found"
+        })
+    }
+
+    return res.status(200).json({
+        success: true,
+        data: user
+    })
+    
+   } catch (error) {
+    console.log("Get user error=>",error);
+    return res.status(500).json({
+        success: false,
+        message: "Something went wrong"
+    })
+   }
+
+}
 
 
-
-
-module.exports={registerUser}
+module.exports = { registerUser, loginUser, getNewAccessToken, getUser };
