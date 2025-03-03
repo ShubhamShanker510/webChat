@@ -1,0 +1,107 @@
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding:0 2rem;
+    box-shadow: 0 4px 15px rgba(10, 10, 10, 0.3);
+    color: white;
+  }
+  
+  .left ul, .right ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .logo img {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+  .images{
+    width: 27px;
+    filter: invert(1);
+  }
+  
+  .my-meeting button {
+    background: #3B82F6;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .my-meeting button:hover {
+    background: #2563EB; /* Darker Blue Hover */
+  }
+  
+  .friends a {
+    background: #3B82F6;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .friends a:hover {
+    background: #2563EB;
+  }
+  
+  .register-btn button {
+    /* background: white; Green */
+    color: white;
+    padding:10px;
+    border: 1px solid white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .register-btn button:hover {
+    box-shadow: 0 2px 0 white
+  }
+  
+  .login-btn button {
+    background: transparent;
+    border: 2px solid #10B981;
+    color: #10B981;
+    padding:10px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .login-btn button:hover {
+    box-shadow: 0 2px 0 #10B981
+  }
+  

@@ -1,0 +1,90 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .glow {
+    animation: glow 1.5s ease-in-out infinite alternate; 
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px #dbd7d7, 0 0 20px #dbd7d7, 0 0 30px #dbd7d7, 0 0 40px #dbd7d7;
+    }
+    to {
+      text-shadow: 0 0 20px #e9e7e7, 0 0 30px #e9e6e6, 0 0 40px #e9e6e6, 0 0 50px #e9e6e6;
+    }
+  }
+  
+  
+  form {
+    width: 400px;
+    padding: 2rem;
+    border: 1px solid white;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+  }
+  
+  .sec-2, .sec-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
+  
+  input {
+    padding: 0.8rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s ease;
+  }
+  
+  input:focus {
+    border: 1px solid #c4c4c7;
+    box-shadow: 0 0 8px rgba(250, 250, 252, 0.5);
+  }
+  
+  .loginBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    
+  }
+  
+
+#btn {
+    text-decoration: none;
+    color: rgba(41, 33, 33, 0.8);
+    background: rgb(221, 216, 224);
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+#btn:hover {
+    color: rgb(15, 4, 4);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+  }
+
