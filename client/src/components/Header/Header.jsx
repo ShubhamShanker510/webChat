@@ -12,7 +12,7 @@ const Header = () => {
            <ul>
             <li> <div className="logo">
                 <img src={videoCall} alt="" />
-                Let's Talk
+                VirtuMeet
             </div></li>
             <li><div className="my-meeting">
                 <button>Create <img  className="images" src={videoCall} alt="" /></button>

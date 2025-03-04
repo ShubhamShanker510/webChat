@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="left-hero">
             <div className="hero-header">
                 <Typewriter
-                  words={["Video calls with anyone , anywhere"]}
+                  words={["Video calls with anyone , anywhere and anytime"]}
                   loop={1}
                   cursor
                   cursorStyle='_'

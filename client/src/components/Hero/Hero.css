@@ -8,6 +8,7 @@
     gap: 50px;
     margin-top: 50px;
     position: absolute;
+    /* overflow: hidden; */
   }
   
   .left-hero {
@@ -69,12 +70,13 @@
   .right-hero {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     left: 353px;
     bottom: 109px;
     z-index: 100;
+    /* overflow: hidden; */
     
   }
   
@@ -82,7 +84,7 @@
     display: flex;
     gap: 20px;
     justify-content: center;
-    
+
   
   }
 

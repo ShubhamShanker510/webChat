@@ -1,0 +1,79 @@
+.about {
+    padding: 20px;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin-top: 516px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* Fade in the entire section */
+  }
+  
+  
+  /* Title styles */
+  .about_title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #333;
+    opacity: 0; /* Initially hidden */
+    animation: slideIn 0.5s forwards; /* Slide in the title */
+    animation-delay: 0.3s; /* Delay before the title animation starts */
+  }
+  
+  .paragraph {
+    font-size: 1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s forwards; /* Fade in the paragraph */
+    animation-delay: 1s; /* Delay for the paragraph to appear after the title */
+  }
+  
+  .paragraph p {
+    margin-bottom: 20px;
+    text-align: justify;
+    color: #555;
+  }
+  
+  .paragraph p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Keyframes for the fade-in effect */
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Keyframes for the slide-in effect */
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about {
+      padding: 15px;
+    }
+  
+    .about_title {
+      font-size: 1.5rem;
+    }
+  
+    .paragraph p {
+      font-size: 0.95rem;
+    }
+  }
+  
