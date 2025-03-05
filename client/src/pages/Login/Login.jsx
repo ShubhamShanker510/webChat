@@ -4,9 +4,10 @@ import './Login.css'
 import spinner from '../../assets/gif/spinner.gif'
 import { loginData } from '../../../api/api'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-
+  const navigate=useNavigate()
   const eError = document.getElementsByClassName('email_error')
   const pError = document.getElementsByClassName('password_error')
    const [loading, setLoading] = useState(false)
@@ -47,6 +48,7 @@ const Login = () => {
             const response = await loginData(formData)
             if (response.success) {
               toast.success("User Login Successfully", { autoClose: 2000, closeButton: true},)
+              navigate('/')
             } else {
               toast.error(response.message, { autoClose: 2000, closeButton: true })
             }

@@ -3,9 +3,12 @@ import videoCall from '../../assets/images/video-call.png'
 import friend from '../../assets/images/friend.png'
 import './Header.css'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import userImg from '../../assets/images/user.png'
 
 const Header = () => {
     const navigate=useNavigate()
+    const userData=useSelector((store)=>store.user.currentUser)
   return (
     <div className='nav'>
         <div className="left">
@@ -23,17 +26,23 @@ const Header = () => {
            </ul>
         </div>
         <div className="right">
-            <ul>
-                <li>
-                    <div className="register-btn">
-                        <button onClick={()=>navigate('/register')}>Register</button>
-                    </div>
-                </li>
-                <li className='login-btn'>
-                    <button onClick={()=>navigate('/login')}>Login</button>
-                </li>
-            </ul>
+{
+  userData ? (
+    <button className='cursor-pointer hover:scale-130' onClick={()=>navigate('/user')}><img className="images" src={userImg} alt="User" /></button>
+  ) : (
+    <ul>
+      <li>
+        <div className="register-btn">
+          <button onClick={() => navigate('/register')}>Register</button>
         </div>
+      </li>
+      <li className='login-btn'>
+        <button onClick={() => navigate('/login')}>Login</button>
+      </li>
+    </ul>
+  )
+}
+</div>
     </div>
   )
 }

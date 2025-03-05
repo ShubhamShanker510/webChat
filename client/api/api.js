@@ -6,6 +6,7 @@ export const sendData=async(data)=>{
         const response=await axios.post('http://localhost:3000/api/user/register',data,{
             withCredentials: true
         })
+        console.log("response=>",response)
 
         if(response.data.success===true){
             return response.data;
@@ -34,5 +35,37 @@ export const loginData=async(data)=>{
     } catch (error) {
         console.log("Sending user data failed=>",error.response.data);
         return error.response.data;
+    }
+}
+
+export const getUserData=async()=>{
+    try {
+        const response=await axios.get('http://localhost:3000/api/user/get',{
+            withCredentials: true
+        });
+
+        if(response.data.success===true){
+            return response.data;
+        }else{
+            return response.data.success;
+        }
+        
+    } catch (error) {
+        console.log("Getting user data failed=>",error);
+        return error.response.data.message
+    }
+}
+
+export const logOutUser=async()=>{
+    try {
+        const response=await axios.delete('http://localhost:3000/api/user/logout',{
+            withCredentials: true
+        })
+
+        return response;
+        
+    } catch (error) {
+        console.log("LogOut user error=>", error);
+        return error.response.data.message;
     }
 }

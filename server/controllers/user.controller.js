@@ -135,16 +135,10 @@ const loginUser=async(req,res)=>{
         }
 
         res.cookie('accessToken',accessToken,{
-            httpOnly: true,
-            secure: true,
-            sameSite: "Strict",
             maxAge: 15*60*1000
         })
 
         res.cookie('refreshToken',refreshToken,{
-            httpOnly: true,
-            secure: true,
-            sameSite: "Strict",
             maxAge: 7*24*60*60*1000
         })
 
@@ -233,5 +227,24 @@ const getUser=async(req,res)=>{
 
 }
 
+const logOut=async(req,res)=>{
+    try {
+      res.clearCookie('accessToken');
+      res.clearCookie('refreshToken');
+    
 
-module.exports = { registerUser, loginUser, getNewAccessToken, getUser };
+        return res.status(200).json({
+            success: true,
+            message: "Logout Successfully"
+        })
+    } catch (error) {
+        console.log("logout error=>",error);
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong"
+        })
+    }
+}
+
+
+module.exports = { registerUser, loginUser, getNewAccessToken, getUser, logOut };
