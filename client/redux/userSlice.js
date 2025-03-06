@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState={
-    currentUser: null
+    currentUser: null,
+    currentMeetingId: null
 }
 
 const userDataSlice=createSlice({
@@ -10,9 +11,12 @@ const userDataSlice=createSlice({
     reducers:{
         getUser: (state,action)=>{
             state.currentUser=action.payload
+        },
+        getMeetingId: (state,action)=>{
+            state.currentMeetingId=action.payload
         }
     }
 })
 
-export const {getUser}=userDataSlice.actions;
+export const {getUser,getMeetingId}=userDataSlice.actions;
 export default userDataSlice.reducer;

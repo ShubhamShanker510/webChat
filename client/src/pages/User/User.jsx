@@ -33,6 +33,10 @@ export const User = () => {
       </div>
       <div className="user_right">
         <div className="user_details">
+        <div className="user_id">
+          <label htmlFor=""> ID: </label>
+          <p>{userData!==null?userData.userId:''}</p>
+        </div>
         <div className="user_name">
           <label htmlFor=""> Name: </label>
           <p>{userData!==null?userData.name:''}</p>

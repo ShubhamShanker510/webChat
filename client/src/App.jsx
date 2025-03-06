@@ -10,6 +10,8 @@ import { getUserData } from '../api/api'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { getUser } from '../redux/userSlice'
+import Meeting from './components/Meeting/Meeting'
+import Join_Meeting from './components/Meeting/joinMeeting/Join_Meeting'
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function MainApp() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/user' element={<User />} />
+        <Route path='/meeting' element={<Meeting/>}/>
+        <Route path='/meeting/:id' element={<Join_Meeting/>}/>
       </Routes>
     </>
   );

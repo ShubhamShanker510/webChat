@@ -69,3 +69,31 @@ export const logOutUser=async()=>{
         return error.response.data.message;
     }
 }
+
+export const createMeeting=async(userId)=>{
+    try {
+        const response=await axios.post(`http://localhost:3000/api/meet/create`,userId,{withCredentials: true});
+
+        if(response.data.success===true){
+            return response.data;
+        }else{
+            return response.data.success;
+        }
+    } catch (error) {
+        console.log("Create meeting error");
+    }
+}
+
+export const joinMeeting=async(meetingId)=>{
+    try {
+        const response=await axios.post(`http://localhost:3000/api/meet/join/${meetingId}`,{withCredentials: true});
+
+        if(response.data.success===true){
+            return response.data;
+        }else{
+            return response.data.success;
+        }
+    } catch (error) {
+        console.log("Create meeting error");
+    }
+}

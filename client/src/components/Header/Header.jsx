@@ -18,7 +18,7 @@ const Header = () => {
                 VirtuMeet
             </div></li>
             <li><div className="my-meeting">
-                <button>Create <img  className="images" src={videoCall} alt="" /></button>
+                <button onClick={()=>navigate('/meeting')}>Create <img  className="images" src={videoCall} alt="" /></button>
             </div></li>
            <li><div className='friends'>
             <a href="">Friends <img className="images" src={friend} alt="" /></a>
